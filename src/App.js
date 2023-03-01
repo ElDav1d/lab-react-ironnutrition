@@ -7,10 +7,15 @@ import FoodList from './components/FoodList';
 function App() {
   const [dishes, setDishes] = useState(data);
   const [searchInput, setSearchInput] = useState('');
+  const [isFormShown, setIsFormShown] = useState(false);
 
   return (
     <div className="App">
-      <AddFoodForm setDishes={setDishes} />
+      {isFormShown && <AddFoodForm setDishes={setDishes} />}
+      <button onClick={() => setIsFormShown(!isFormShown)}>
+        {isFormShown ? 'Hide Form' : 'Add New Food'}
+      </button>
+      <br />
       <Search setSearchInput={setSearchInput} />
       <FoodList
         dishes={dishes}
