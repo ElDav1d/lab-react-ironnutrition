@@ -1,7 +1,6 @@
 import FoodBox from './FoodBox';
 
 function FoodList({ dishes }) {
-  console.log(dishes);
   return (
     <>
       <h2>FoodList</h2>

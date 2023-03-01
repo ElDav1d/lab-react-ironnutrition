@@ -5,7 +5,7 @@ function FoodItem({ name, image, calories, servings }) {
       <h3>{name}</h3>
       <p>Calories: {calories}</p>
       <p>Servings: {servings}</p>
-      <p>Totel Calories: {calories}</p>
+      <p>Total Calories: {calories * servings}</p>
       <button>DELETE</button>
     </li>
   );
