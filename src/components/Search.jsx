@@ -5,7 +5,7 @@ function Search({ setSearchInput }) {
 
   return (
     <>
-      <label htmlFor="searchInput">Search</label>;
+      <label htmlFor="searchInput">Search</label>
       <input type="text" name="searchInput" onChange={handleSearch} />
     </>
   );

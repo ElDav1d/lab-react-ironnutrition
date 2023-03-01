@@ -1,6 +1,6 @@
 import FoodBox from './FoodBox';
 
-function FoodList({ dishes, searchInput }) {
+function FoodList({ dishes, searchInput, setDishes }) {
   return (
     <>
       <h2>FoodList</h2>
@@ -16,6 +16,8 @@ function FoodList({ dishes, searchInput }) {
               calories={calories}
               servings={servings}
               key={name + index}
+              setDishes={setDishes}
+              index={index}
             />
           ))}
       </ul>

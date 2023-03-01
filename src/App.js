@@ -12,7 +12,11 @@ function App() {
     <div className="App">
       <AddFoodForm setDishes={setDishes} />
       <Search setSearchInput={setSearchInput} />
-      <FoodList dishes={dishes} searchInput={searchInput} />
+      <FoodList
+        dishes={dishes}
+        searchInput={searchInput}
+        setDishes={setDishes}
+      />
     </div>
   );
 }

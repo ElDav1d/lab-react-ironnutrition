@@ -1,4 +1,11 @@
-function FoodItem({ name, image, calories, servings }) {
+function FoodItem({ name, image, calories, servings, setDishes, index }) {
+  const handleDelete = () => {
+    setDishes((dishes) => {
+      const newDishes = [...dishes];
+      newDishes.splice(index, 1);
+      return newDishes;
+    });
+  };
   return (
     <li style={{ marginBottom: '2rem' }}>
       <img src={image} alt={`A plate of ${name}`} width={100} />
@@ -6,7 +13,7 @@ function FoodItem({ name, image, calories, servings }) {
       <p>Calories: {calories}</p>
       <p>Servings: {servings}</p>
       <p>Total Calories: {calories * servings}</p>
-      <button>DELETE</button>
+      <button onClick={handleDelete}>DELETE</button>
     </li>
   );
 }
