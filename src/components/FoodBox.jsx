@@ -1,3 +1,5 @@
+import { Button, Card, Col, Image } from 'antd';
+
 function FoodItem({ name, image, calories, servings, setDishes, index }) {
   const handleDelete = () => {
     setDishes((dishes) => {
@@ -7,14 +9,21 @@ function FoodItem({ name, image, calories, servings, setDishes, index }) {
     });
   };
   return (
-    <li style={{ marginBottom: '2rem' }}>
-      <img src={image} alt={`A plate of ${name}`} width={100} />
-      <h3>{name}</h3>
-      <p>Calories: {calories}</p>
-      <p>Servings: {servings}</p>
-      <p>Total Calories: {calories * servings}</p>
-      <button onClick={handleDelete}>DELETE</button>
-    </li>
+    <Col role="listitem" xs={24} sm={18} md={12} lg={6} xl={4}>
+      <Card title={name} hoverable size="small" style={{ height: 300 }}>
+        <Image src={image} alt={`A plate of ${name}`} height={75} />
+        <p>Calories: {calories}</p>
+        <p>
+          Servings: <b>{servings}</b>
+        </p>
+        <p>
+          <b>Total Calories: {calories * servings}</b> kcal
+        </p>
+        <Button type="primary" onClick={handleDelete}>
+          DELETE
+        </Button>
+      </Card>
+    </Col>
   );
 }
 
