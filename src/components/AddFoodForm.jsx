@@ -12,41 +12,37 @@ import {
 const { Title } = Typography;
 
 function AddFoodForm({ setDishes }) {
-  const [name, setName] = useState('');
-  const [image, setImage] = useState('');
-  const [calories, setCalories] = useState(0);
-  const [servings, setServings] = useState(0);
+  const cleanState = {
+    name: '',
+    image: '',
+    calories: 0,
+    servings: 0,
+  };
+
+  const [formInput, setFormInput] = useState(cleanState); // *t he more fields, the more optim an object is!!
 
   const clearState = () => {
-    setName('');
-    setImage('');
-    setCalories(0);
-    setServings(0);
+    setFormInput(cleanState);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const newDish = { name, image, calories, servings };
-
-    setDishes((dishes) => [newDish, ...dishes]);
+    setDishes((dishes) => [formInput, ...dishes]);
     clearState();
   };
 
-  const handleName = (event) => {
-    setName(event.target.value);
-  };
+  const handleInput = (event) => {
+    const newState = { ...formInput };
+    if (event.target.name) {
+      newState[event.target.name] = event.target.value;
+    } else if (typeof event === 'number') {
+      console.log('boooooo');
+    }
 
-  const handleImage = (event) => {
-    setImage(event.target.value);
-  };
+    console.log(event);
 
-  const handleCalories = (event) => {
-    setCalories(event.target.value);
-  };
-
-  const handleServings = (event) => {
-    setServings(event.target.value);
+    setFormInput(newState);
   };
 
   return (
@@ -59,25 +55,21 @@ function AddFoodForm({ setDishes }) {
           <Col xs={24} xl={12}>
             <Form.Item
               label="Name"
-              name="username"
-              initialValue={name}
-              onChange={handleName}
+              initialValue={formInput.name}
               rules={[
                 {
                   required: true,
-                  message: 'Please input the name of the dish username!',
+                  message: 'Please input the name of the dish name!',
                 },
               ]}
             >
-              <Input />
+              <Input name="name" onChange={handleInput} />
             </Form.Item>
           </Col>
           <Col xs={24} xl={12}>
             <Form.Item
               label="Image"
-              name="image"
-              initialValue={image}
-              onChange={handleImage}
+              initialValue={formInput.image}
               rules={[
                 {
                   required: true,
@@ -85,15 +77,13 @@ function AddFoodForm({ setDishes }) {
                 },
               ]}
             >
-              <Input />
+              <Input name="image" onChange={handleInput} />
             </Form.Item>
           </Col>
           <Col xs={12} md={6}>
             <Form.Item
               label="Calories"
-              name="calories"
-              initialValue={calories}
-              onChange={handleCalories}
+              initialValue={formInput.calories}
               rules={[
                 {
                   required: true,
@@ -101,15 +91,13 @@ function AddFoodForm({ setDishes }) {
                 },
               ]}
             >
-              <InputNumber />
+              <InputNumber name="calories" onChange={handleInput} />
             </Form.Item>
           </Col>
           <Col xs={12} md={6}>
             <Form.Item
               label="Servings"
-              name="servings"
-              initialValue={servings}
-              onChange={handleServings}
+              initialValue={formInput.servings}
               rules={[
                 {
                   required: true,
@@ -117,7 +105,12 @@ function AddFoodForm({ setDishes }) {
                 },
               ]}
             >
-              <InputNumber min={1} max={10} />
+              <InputNumber
+                min={1}
+                max={10}
+                name="servings"
+                onChange={handleInput}
+              />
             </Form.Item>
           </Col>
           <Col xs={24}>
